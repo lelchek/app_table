@@ -5,7 +5,8 @@ const initialState = {
     name: "Ily",
     phone: "123-33-44"
   },
-  authorisation: false
+  authorisation: false,
+  data: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,6 +20,16 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         authorisation: false
+      };
+    case "INITIAL_DATA":
+      return {
+        ...state,
+        data: action.payload
+      };
+    case "DELETE_DATA_ITEM":
+      return {
+        ...state,
+        data: state.data.filter(data => data.id !== action.payload)
       };
     default:
       return state;
