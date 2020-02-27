@@ -2,11 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import shortId from "shortid";
 import services from "../../services/services";
-import { initialData, deleteDataItem } from "../../redux/actions";
-import DataItem from "../dataItem/DataItem";
+import { initialData, deleteDataItem, addDataItem } from "../../redux/actions";
+import DataItem from "./dataItem/DataItem";
 
 class Table extends Component {
-  state = {};
+  state = {
+    firstName: "",
+    lastName: "",
+    city: "",
+    business: ""
+  };
 
   componentDidMount() {
     this.props.data.length === 0 && this.createData();
@@ -22,9 +27,39 @@ class Table extends Component {
     this.props.initialData(dataToStore);
   };
 
-  addNewDataItem;
+  addNewDataItem = () => {};
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  handleSubmit = e => {
+    const { firstName, lastName, city, business } = this.state;
+
+    e.preventDefault();
+    this.props.addDataItem({
+      name: firstName,
+      lastName: lastName,
+      city: city,
+      business: business,
+      id: shortId()
+    });
+    this.onResetForm();
+  };
+
+  onResetForm = () => {
+    this.setState({
+      firstName: "",
+      lastName: "",
+      city: "",
+      business: ""
+    });
+  };
 
   render() {
+    const { firstName, lastName, city, business } = this.state;
     return (
       <div>
         <table>
@@ -51,7 +86,43 @@ class Table extends Component {
             ))}
           </tbody>
         </table>
-        <button>Add New Item</button>
+        <form onSubmit={this.handleSubmit}>
+          <input
+            required
+            onChange={this.handleChange}
+            type="text"
+            name="firstName"
+            placeholder="First Name"
+            value={firstName}
+          ></input>
+          <input
+            required
+            onChange={this.handleChange}
+            type="text"
+            name="lastName"
+            placeholder="Last Name"
+            value={lastName}
+          ></input>
+          <input
+            required
+            onChange={this.handleChange}
+            type="text"
+            name="city"
+            placeholder="City"
+            value={city}
+          ></input>
+          <input
+            required
+            onChange={this.handleChange}
+            type="text"
+            name="business"
+            placeholder="Business"
+            value={business}
+          ></input>
+          <button type="submit" onClick={this.handleSubmit}>
+            Add New Item
+          </button>
+        </form>
       </div>
     );
   }
@@ -65,7 +136,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   initialData,
-  deleteDataItem
+  deleteDataItem,
+  addDataItem
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);

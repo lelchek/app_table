@@ -13,6 +13,11 @@ export const initialData = value => ({
   payload: value
 });
 
+export const addDataItem = value => ({
+  type: Type.ADD_DATA_ITEM,
+  payload: value
+});
+
 export const deleteDataItem = id => ({
   type: Type.DELETE_DATA_ITEM,
   payload: id

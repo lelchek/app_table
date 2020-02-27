@@ -26,6 +26,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         data: action.payload
       };
+    case "ADD_DATA_ITEM":
+      return {
+        ...state,
+        data: [...state.data, action.payload]
+      };
     case "DELETE_DATA_ITEM":
       return {
         ...state,

@@ -47,7 +47,7 @@ class AuthForm extends Component {
           <input
             required
             onChange={this.handleChange}
-            type="texy"
+            type="text"
             name="username"
             value={username}
           />
