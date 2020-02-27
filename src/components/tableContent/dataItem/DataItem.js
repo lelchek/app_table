@@ -7,7 +7,9 @@ const DataItem = ({ firstName, lastName, city, business, deleteItem }) => (
     <td>{city}</td>
     <td>{business}</td>
     <td>
-      <button onClick={deleteItem}>Delete</button>
+      <button className="ui button" onClick={deleteItem}>
+        Удалить
+      </button>
     </td>
   </tr>
 );

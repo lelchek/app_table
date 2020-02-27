@@ -1,10 +1,10 @@
 import React from "react";
-import Table from "../../components/table/Table";
+import TableContent from "../../components/tableContent/TableContent";
+import css from "./contentPage.module.css";
 
 const ContentPage = () => (
-  <div>
-    <h2>Данные пользователей</h2>
-    <Table />
+  <div className={css.container}>
+    <TableContent />
   </div>
 );
 

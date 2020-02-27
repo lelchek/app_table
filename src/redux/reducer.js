@@ -2,7 +2,8 @@ const initialState = {
   user: {
     username: "admin",
     password: "password",
-    name: "Ily",
+    name: "Name",
+    lastName: "Last Name",
     phone: "123-33-44"
   },
   authorisation: false,

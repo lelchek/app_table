@@ -1,17 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { Notification } from "react-pnotify";
+import { Button, Form } from "semantic-ui-react";
 import { logIn } from "../../redux/actions";
+import css from "./authForm.module.css";
 
 class AuthForm extends Component {
   state = {
     username: "",
-    password: ""
+    password: "",
+    validForm: true
   };
 
   handleChange = e => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
+      validForm: true
     });
   };
   handleSubmit = e => {
@@ -26,7 +31,7 @@ class AuthForm extends Component {
     ) {
       this.props.logIn();
     } else {
-      alert("Имя пользователя или пароль введены неверно");
+      this.setState({ validForm: false });
     }
   };
 
@@ -38,31 +43,47 @@ class AuthForm extends Component {
   };
 
   render() {
-    const { username, password } = this.state;
+    const { username, password, validForm } = this.state;
     return (
-      <div>
+      <div className={css.containerForm}>
+        {!validForm && (
+          <Notification
+            type="error"
+            title="Ошибка"
+            text="Имя пользователя или пароль введены неверно"
+            delay={2500}
+            shadow={true}
+            hide={true}
+            nonblock={false}
+            desktop={false}
+          />
+        )}
         {this.props.authorisation && <Redirect to="/profile" />}
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="username">Имя пользователя</label>
-          <input
-            required
-            onChange={this.handleChange}
-            type="text"
-            name="username"
-            value={username}
-          />
-          <label htmlFor="password"> Пароль </label>
-          <input
-            required
-            onChange={this.handleChange}
-            type="password"
-            name="password"
-            value={password}
-          />
-          <button type="submit" onClick={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Field>
+            <label htmlFor="username">Имя пользователя</label>
+            <input
+              required
+              onChange={this.handleChange}
+              type="text"
+              name="username"
+              value={username}
+            />
+          </Form.Field>
+          <Form.Field>
+            <label htmlFor="password"> Пароль </label>
+            <input
+              required
+              onChange={this.handleChange}
+              type="password"
+              name="password"
+              value={password}
+            />
+          </Form.Field>
+          <Button primary type="submit">
             Войти
-          </button>
-        </form>
+          </Button>
+        </Form>
       </div>
     );
   }

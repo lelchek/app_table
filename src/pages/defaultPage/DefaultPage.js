@@ -1,4 +1,10 @@
 import React from "react";
-const DefaultPage = () => <div>OOOPS 404 error</div>;
+import css from "./defaultPage.module.css";
+
+const DefaultPage = () => (
+  <div>
+    <h2 className={css.title}>OOOPS... 404 error</h2>
+  </div>
+);
 
 export default DefaultPage;

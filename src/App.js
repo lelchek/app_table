@@ -7,12 +7,14 @@ import LoginPage from "./pages/loginPage/LoginPage";
 import ContentPage from "./pages/contentPage/ContentPage";
 import ProfilePage from "./pages/profilePage/ProfilePage";
 import DefaultPage from "./pages/defaultPage/DefaultPage";
+import css from "./app.module.css";
+import "semantic-ui-css/semantic.min.css";
 
 function App() {
   return (
-    <div>
+    <div className={css.container}>
       <Header />
-      <div>
+      <div className={css.main}>
         <Switch>
           <Route path="/" exact component={HomePage} />
           <Route path="/login" component={LoginPage} />
