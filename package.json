@@ -48,5 +48,5 @@
   "devDependencies": {
     "redux-devtools-extension": "^2.13.8"
   },
-  "homepage": "https://lelchek.github.io/app_table/"
+  "homepage": "//lelchek.github.io/app_table"
 }
