@@ -17,6 +17,7 @@ function App() {
       <div className={css.main}>
         <Switch>
           <Route path="/" exact component={HomePage} />
+          <Route path="/app_table" component={HomePage} />
           <Route path="/login" component={LoginPage} />
           <Route path="/content" component={ContentPage} />
           <Route path="/profile" component={ProfilePage} />
